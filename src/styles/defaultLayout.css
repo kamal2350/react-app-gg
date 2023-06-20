@@ -1,0 +1,16 @@
+.ant-layout{
+    height: 100vh;
+
+}
+.ant-layout-header{
+    display: flex;
+    justify-content: space-between;
+    
+    padding-right: 30px;
+    background-color: white;
+
+}
+.cart_icon{
+    width: 10vw;
+    font-size: large;
+}

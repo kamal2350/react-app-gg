@@ -1,0 +1,12 @@
+.empty_cart{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.cart_page{
+    height: 50vh;
+    overflow: scroll;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+    scrollbar-width: thin;
+}
