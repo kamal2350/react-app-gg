@@ -34,7 +34,7 @@ const HomePage = () => {
   useEffect(()=>{
     const getAllItems = async()=>{
       try {
-        const {data } = await axios.get('http://localhost:4000/api/items/get-items');
+        const {data } = await axios.get(`${HostName}/api/items/get-items`);
         setItemsData(data);
         console.log(data);
       } catch (error) {
