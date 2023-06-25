@@ -6,7 +6,7 @@ import { Button, Form, Input, Modal, Table, message } from 'antd'
 import { DeleteOutlined, EditOutlined } from '@ant-design/icons'
 import '../styles/itempage.css';
 import { HostName } from '../utils/config';
-
+import { Space,Spin } from 'antd';
 
 const ItemsPage = () => {
   const [itemData,setItemData]= useState([]);
@@ -149,7 +149,7 @@ const handleUpdate =async(e)=>{
   return (
     <div>
       <DefaultLayout>
-        <div className='item_header'>
+      { itemData.length!==0? <div className='item_header'>
         <h1>Items Page</h1>
         <Button type='primary' onClick={()=>{
           setEditButton(false);
@@ -201,9 +201,13 @@ const handleUpdate =async(e)=>{
 
         
         </Modal>
-        </div>
+        </div>:
+        <Space direction='vertical' style={{width:'100%',height:'100%',display:'flex',justifyContent:'center' ,alignItems:'center'}}>
+        <Spin tip="loading"></Spin>
+      </Space>
+        }
         
-        <Table bordered={1}  columns={column}  dataSource={itemData}/>
+       {itemData.length!==0 && <Table bordered={1}  columns={column}  dataSource={itemData}/>}
         
       </DefaultLayout>
     </div>

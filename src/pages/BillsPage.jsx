@@ -8,6 +8,7 @@ import { useReactToPrint } from "react-to-print";
 import '../styles/invoice.css';
 import logo from '../assets/logo.svg';
 import { HostName } from '../utils/config';
+import { Space,Spin } from 'antd';
 const BillsPage = () => {
   const componentRef = useRef();
   const[billsData,setBillsData]=useState([]);
@@ -59,7 +60,7 @@ const BillsPage = () => {
   return (
     <div>
       <DefaultLayout>
-      
+      {billsData.length!==0?<>
       <div className="d-flex justify-content-between" >
         <h1>Invoice list</h1>
       </div>
@@ -189,7 +190,11 @@ const BillsPage = () => {
         </Modal>
       )
       }
-      
+      </>:
+      <Space direction='vertical' style={{width:'100%',height:'100%' ,display:'flex',justifyContent:'center',alignItems:'center'}}>
+      <Spin tip="loading"></Spin>
+      </Space>  
+      }
 
       </DefaultLayout>
     </div>

@@ -6,6 +6,7 @@ import { useSelector,useDispatch } from 'react-redux';
 import '../styles/homepage.css'
 import { addToCart,removeFromCart } from '../redux/cartSlice';
 import { HostName } from '../utils/config';
+import { Space,Spin } from 'antd';
 const HomePage = () => {
   const [itemsData,setItemsData] = useState([]);
   const [showAdd,setShowAdd]=useState(true);
@@ -52,6 +53,7 @@ const HomePage = () => {
     <div>
         <DefaultLayout>
           <div className='home_container'>
+         {itemsData.length!==0?   <>
             <div className="category_section">
               <Row className='category_row'>
                 <div className= 'category_col'  onClick={handleCategory}>All</div>
@@ -76,8 +78,13 @@ const HomePage = () => {
                 
               )
             })}
+           
             </div> 
-                
+            </>:
+            <Space direction='vertical' size='large' style={{width:'100%',height:'70vh',justifyContent:'center',display:'flex',alignItems:'center'}}>
+            <Spin tip="loading"></Spin>
+          </Space>
+            }
            
           </div>
         </DefaultLayout>
