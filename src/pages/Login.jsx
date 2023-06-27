@@ -24,7 +24,7 @@ const Login = () => {
        try {
 
             dispatch(loginStart());
-                const user =  await axios.post(`http://localhost:4000/api/auth/login`,credentails,{
+                const user =  await axios.post(`${HostName}/api/auth/login`,credentails,{
                     withCredentials:true,
                     credentails:'include'
                 });
