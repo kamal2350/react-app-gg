@@ -73,7 +73,9 @@ const Cartpage = () => {
         }
         console.log(billObj);
 
-        const res = await axios.post(`${HostName}/api/bills/add-bill`,billObj);
+        const res = await axios.post(`${HostName}/api/bills/add-bill`,billObj,{
+          withCredentials:true
+        });
         console.log(res.data);
         setShowBillPopup(false);
         dispatch(emptyCart())

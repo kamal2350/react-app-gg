@@ -18,7 +18,9 @@ const BillsPage = () => {
   // get all bills Data
   const getAllBills=async()=>{
     try {
-        const res = await axios.get(`${HostName}/api/bills`);
+        const res = await axios.get(`${HostName}/api/bills`,{
+          withCredentials:true
+        });
          setBillsData(res.data);
         
     } catch (error) {

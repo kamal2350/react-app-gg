@@ -52,7 +52,9 @@ const ItemsPage = () => {
   ]
   const getAllItems = async()=>{
     try {
-      const {data } = await axios.get(`${HostName}/api/items/get-items`);
+      const {data } = await axios.get(`${HostName}/api/items/get-items`,{
+        withCredentials:true
+      });
      
       setItemData(data);
       console.log(data);
@@ -84,7 +86,9 @@ const handleDelete =async(item)=>{
           const headers={
             id:item._id
           }
-          await axios.delete(`${HostName}/api/items/delete-item`,{headers})
+          await axios.delete(`${HostName}/api/items/delete-item`,{headers},{
+            withCredentials:true
+          })
           message.success("Item deleted Successfully");
           getAllItems();
         }
@@ -97,8 +101,8 @@ const handleDelete =async(item)=>{
 const handleSubmit=async(e)=>{
   e.preventDefault();
   try {
-   console.log(JSON.stringify(formData));
-    const res = await axios.post(`${HostName}/api/items/ad  d-item`,formData);
+  //  console.log(JSON.stringify(formData));
+    const res = await axios.post(`${HostName}/api/items/add-item`,formData);
     message.success("Item Added Successfully");
     getAllItems();
     setFormData({
@@ -135,7 +139,9 @@ const handleUpdate =async(e)=>{
   try {
     const {id,...others} = editItemData;
     console.log(editItemData);
-   const res = await axios.put(`${HostName}/api/items/edit-item`,{id,others});
+   const res = await axios.put(`${HostName}/api/items/edit-item`,{id,others},{
+    withCredentials:true
+   });
     getAllItems();
     setOpenModal(false);
    message.success("Updated Successfully");

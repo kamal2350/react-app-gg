@@ -8,17 +8,24 @@ import HomePage from './pages/HomePage';
 import ItemsPage from './pages/ItemsPage'
 import Cartpage from './pages/Cartpage'
 import BillsPage from './pages/BillsPage'
+import Login from './pages/Login'
+import { useSelector,useDispatch } from 'react-redux'
 function App() {
-  const [count, setCount] = useState(0)
+  const [count, setCount] = useState(0);
+  const user = useSelector(state=>state.user.user);
+  
+
+  
 
   return (
     <>
     <BrowserRouter>
       <Routes>
-        <Route path='/' element={<HomePage/>}/>
-        <Route path ='/items' element ={<ItemsPage/>}/>
-        <Route path='/cart' element={<Cartpage/>}/>
-        <Route path='/bills' element={<BillsPage/>}/>
+        <Route path='/' element={user?<HomePage/>:<Login/>}/>
+        <Route path ='/items' element ={user?<ItemsPage/>:<Login/>}/>
+        <Route path='/cart' element={user?<Cartpage/>:<Login/>}/>
+        <Route path='/bills' element={user?<BillsPage/>:<Login/>}/>
+        <Route path='/login' element={<Login/>}/>
       </Routes>
     </BrowserRouter>
     </>

@@ -19,11 +19,15 @@ const HomePage = () => {
       try {
        
         if(category==="All"){
-          const {data } = await axios.get(`${HostName}api/items/get-items`);
+          const {data } = await axios.get(`${HostName}/api/items/get-items`,{
+            withCredentials:true
+          });
           setItemsData(data);
         }
         else{
-          const {data} = await axios.get(`${HostName}/api/items/get-items/${category}`);
+          const {data} = await axios.get(`${HostName}/api/items/get-items/${category}`,{
+            withCredentials:true
+          });
           setItemsData(data);
         }
       } catch (error) {
@@ -35,7 +39,9 @@ const HomePage = () => {
   useEffect(()=>{
     const getAllItems = async()=>{
       try {
-        const {data } = await axios.get(`${HostName}/api/items/get-items`);
+        const {data } = await axios.get(`${HostName}/api/items/get-items`,{
+          withCredentials:true
+        });
         setItemsData(data);
         console.log(data);
       } catch (error) {

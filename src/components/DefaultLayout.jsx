@@ -6,16 +6,20 @@ import {
   CopyOutlined,
   UnorderedListOutlined,
   LogoutOutlined,
-  ShoppingCartOutlined
+  ShoppingCartOutlined,
+  LoginOutlined
 
 } from '@ant-design/icons';
-import { Layout, Menu, Button, theme } from 'antd';
+import { useDispatch,useSelector } from 'react-redux';
+import { logoutUser } from '../redux/userSlice';
+import { Layout, Menu, Button, theme, message } from 'antd';
 import "../styles/defaultLayout.css";
 import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
 import Cartpage from '../pages/Cartpage';
 const { Header, Sider, Content } = Layout;
 import logo from '../assets/logo.svg'
+import axios from 'axios';
+import { HostName } from '../utils/config';
 
 const DefaultLayout = ({children}) => {
   const [collapsed, setCollapsed] = useState(false);
@@ -23,6 +27,21 @@ const DefaultLayout = ({children}) => {
   const {
     token: { colorBgContainer },
   } = theme.useToken();
+  const dispatch =useDispatch();
+  // handle Logout
+
+  const handleLogOut =async()=>{
+    try {
+       await axios.get(`${HostName}/api/auth/logout`,{
+        withCredentials:true
+       });
+       dispatch(logoutUser());
+
+    } catch (error) {
+      message.error("Something Went Wrong");
+      console.log(error);
+    }
+  }
 
   return (
     <Layout>
@@ -45,12 +64,12 @@ const DefaultLayout = ({children}) => {
                 <Link to="/bills" className='no-underline' >Bills</Link>
             </Menu.Item>
             <Menu.Item key="/customers" icon={<HomeOutlined/>}>
-                <Link to="/customers" className='no-underline' >Customers</Link>
+            <Link to="/customers" className='no-underline' >Customers</Link>
             </Menu.Item>
             <Menu.Item key="/logout" icon={<LogoutOutlined/>}>
-                Logout
+            <Link to="/login" onClick={()=>handleLogOut()} className='no-underline' >Logout</Link>
             </Menu.Item>
-
+          
         </Menu>
       </Sider>
       <Layout>
